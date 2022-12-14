@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  root:
+    container_name: root
+    build:
+      context: ./root
+
+  one:
+    container_name: one
+    build:
+      context: ./one
+
+  two:
+    container_name: two
+    build:
+      context: ./two
+
+  orchestrator:
+    container_name: orchestrator
+    ports:
+      - 81:80
+    depends_on:
+      - one
+      - two
+      - root
+    build:
+      context: .
